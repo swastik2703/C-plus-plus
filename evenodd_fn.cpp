@@ -1,25 +1,21 @@
 #include<iostream>
 using namespace std;
 
-bool iseven(int i)
+void iseven(int n)
 {
-    if(i%2==0)
+    if(n%2==0)
     {
-        return true;
+        cout<<"even";
     }
-    return false;
+    else{
+    cout<<"odd";
+    }
+    return;
 }
-
 
 int main()
 {
     int n;
     cin>>n;
-    for(int i=1;i<n;i++)
-    {
-        if(iseven(i))
-        {
-            cout<<i<<" ";
-        }
-    }
+    iseven(n);
 }
