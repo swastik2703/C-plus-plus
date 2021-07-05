@@ -1,1 +1,1 @@
-max
+ismin(a,b,c);
