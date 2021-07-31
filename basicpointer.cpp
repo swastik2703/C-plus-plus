@@ -9,4 +9,6 @@ int main()
     cout<<&a;
     cout<<endl<<aptr;
     cout<<endl<<*aptr;
+    *aptr=20;
+    cout<<endl<<*aptr;
 }
