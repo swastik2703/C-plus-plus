@@ -13,7 +13,7 @@ void primefactor(int n)
     {
         if(a[i]==i)     //check agar unmarked hai 
         {
-            for(int j=i^2;j<=n;j+=i)
+            for(int j=i*i;j<=n;j+=i)
             {
                 if(a[j]==j)     //j mai enter krne ke baad j ko check kro vo unmarked hai if yes
                 {
