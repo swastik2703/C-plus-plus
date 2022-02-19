@@ -1,111 +1,172 @@
 #include<iostream>
 using namespace std;
 
-
 class node{
-    public:
-    int data;
-    node* prev = NULL;
-    node* next = NULL;
+public:
+int data;
+node* next;
+node* prev; 
 
-    node(int d){
-        this->data = d;
-        this->next = NULL;
-        this->prev = NULL;
+    node(int data){
+        this->data = data;
+        this -> next = NULL;
+        this -> prev = NULL;
+    }
+
+    ~node(){
+        int val = this -> data;
+        if(next != NULL){
+            delete next;
+            next = NULL;
+        }
+
+        cout<<"the node deleted is: "<<val<<endl;
     }
 };
 
-//find length of list
-void getlen(node* head){
-    int len = 0;
+//print function
+void print(node* head){
     node* temp = head;
 
-    while(temp!= NULL){
+    while(temp!=NULL){
+        cout<<temp->data<<" ";
+        temp = temp->next;
+        
+    }
+    cout<<endl;
+}
+
+//getlength
+int getlength(node* head){
+    node* temp = head;
+    int len = 0;
+    while(temp!=NULL){
         len++;
         temp = temp->next;
     }
-
-    cout<<len<<endl;
+   
+    return len;
 }
 
-
-//inserting at head
-void insertatstart(node* &head,int d){
-    //newnode
-    node* temp = new node(d);
-    temp->next = head;
+//insert at start
+void insertatstart(node* &head,int data){
+    node* temp = new node(data);
+    temp ->next = head;
     head->prev = temp;
     head = temp;
 }
 
+//insert at last
+void insertatlast(node* &tail,node* &head,int data){
 
-//inserting at tail
-void insertattail(node* &tail,int d){
-    //newnode
-    node* temp = new node(d);
-    tail->next = temp;
-    temp->prev = tail;
-    tail = temp;
-}
+    if(tail==NULL){
+        node* temp = new node(data);
+        tail = temp;
+        head = temp;
+    }
+    else{
+        node* temp = new node(data);
+        tail -> next = temp;
+        temp->prev = tail;
+        tail = temp; 
+    }
+    
+} 
 
 
-//insertatpos
-void insertatpos(node* &tail,node* &head,int pos,int d){
-    //new node
+//at certain pos
+void insertatpos(node* &head,node* &tail,int pos,int data){
+
+    if(pos == 1){
+        insertatstart(head,data);
+        return;
+    }
+
     node* temp = head;
     int count = 1;
 
-    //at starting
-    if(pos == 1){
-        insertatstart(head,d);
-        return;
-    }
-
     while(count < pos-1){
-      temp = temp->next;
+        temp = temp->next;
         count++;
     }
 
-    //inserting at last pos
     if(temp->next == NULL){
-        insertattail(tail,d);
+        insertatlast(tail,head,data);
         return;
     }
 
-//newnode
-node* nextnode = new node(d);
+    node* nextnode = new node(data);
     nextnode->next = temp->next;
     temp->next->prev = nextnode;
     temp->next = nextnode;
-    nextnode->prev = temp;
+    nextnode ->prev = temp;
+
 }
 
+//delete node
+void deletenode(node* &head,int pos){
+    if(pos == 1){
+        node* temp = head;
+        temp -> next -> prev = NULL;
+        head = temp->next;
+        temp->next = NULL;
+    }
 
-//traversing
-void print(node* head){
-    //newnode
-    node* temp = head;
-    while(temp!=NULL){
-        cout<<temp->data<<" ";
-        temp = temp->next;
-    }cout<<endl;
+    else{
+        node* curr = head;
+        node* prev = NULL;
+        int count = 1;
+
+        while(count<pos){
+            prev = curr;
+            curr= curr ->next;
+            count++;
+        }
+
+        curr->prev= NULL;
+        prev->next = curr->next;  
+        // curr->next->prev = prev;
+        curr->next = NULL;
+        
+        delete curr;
+
+    
+
+    }
 }
 
 int main(){
-    //newnode
+    //create new node
     node* node1 = new node(10);
     node* head = node1;
     node* tail = node1;
-
     print(head);
-    //getlen(head);
-
-    insertatstart(head,8);
-    print(head);    
-
-    insertattail(tail,12);
+    //call getlength
+    cout<<getlength(head)<<endl;
+    
+    //print at star
+    insertatstart(head,2);
+    print(head);
+    insertatstart(head,1);
     print(head);
 
-    insertatpos(tail,head,1,101);
+    //print at last
+    insertatlast(tail,head,3);
     print(head);
+    insertatlast(tail,head,4);
+    print(head);
+
+    //print at certain pos
+    insertatpos(head,tail,4,33);
+    print(head);
+    insertatpos(head,tail,7,100);
+    print(head);
+    insertatpos(head,tail,1,101);
+    print(head);
+
+    deletenode(head,3);
+    print(head);
+    
+
+
 }

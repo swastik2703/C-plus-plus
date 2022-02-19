@@ -68,7 +68,7 @@ void print(node* &head){
 
 
 //delete begin node
-void deletenode(node* &head,int pos){
+void deletenode(node* &head,node* &tail,int pos){
     if(pos == 1){
         node* temp = head;
         head = head->next;
@@ -89,6 +89,7 @@ void deletenode(node* &head,int pos){
 
         prev->next = curr->next;
         curr->next = NULL;
+        tail = prev;
         delete curr;
     }
 }
