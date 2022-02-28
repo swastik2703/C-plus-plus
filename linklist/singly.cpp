@@ -1,4 +1,5 @@
 #include<iostream>
+#include<map>
 using namespace std;
 
 class node{
@@ -42,19 +43,34 @@ void insertattail(node* &tail,int data){
     tail = temp;
 }
 
-void insertatpos(node* &head,int pos,int d){
+
+void insertatpos(node* &head,node* &tail,int pos,int data){
+
+    if(pos == 1){
+        insertatbegin(head,data);
+        return;
+    }
+
     node* temp = head;
     int count = 1;
+
     while(count < pos-1){
         temp = temp->next;
         count++;
     }
 
-    //newnode for inserting at pos
-    node* nextnode = new node(d);
+    if(temp->next == NULL){
+        insertattail(tail,data);
+        return;
+    }
+
+    node* nextnode = new node(data);
     nextnode->next = temp->next;
     temp->next = nextnode;
+    nextnode = temp;
+
 }
+
 
 
 //traversing linklist
@@ -94,6 +110,28 @@ void deletenode(node* &head,node* &tail,int pos){
     }
 }
 
+bool detectloop(node* head){
+    if(head == NULL){
+        return false;
+    }
+
+    map<node*,bool> visited;
+    node* temp = head;
+
+    while(temp!=NULL){
+        if(visited[temp] == true){
+            cout<<"loop starts from: "<<temp->data<<endl;
+            return true;
+        }
+
+        visited[temp] = true;
+        temp = temp->next;
+    }
+
+    return false;
+
+}
+
 
 int main(){
     //make a newnode
@@ -102,24 +140,33 @@ int main(){
     node* tail = node1;
 
 
-    print(head);
+   // print(head);
     insertatbegin(head,5);
-    cout<<"on adding node at start"<<endl;
-    print(head);
-    cout<<endl;
+    // cout<<"on adding node at start"<<endl;
+    // print(head);
+    // cout<<endl;
 
-    cout<<"adding at last"<<endl;
-    insertattail(tail,20);
-    print(head);
-    cout<<endl;
+    // cout<<"adding at last"<<endl;
+     insertattail(tail,20);
+    // print(head);
+    // cout<<endl;
 
-    cout<<"inserting node at certain postion"<<endl;
-    insertatpos(head,3,15);
+    // cout<<"inserting node at certain postion"<<endl;
+    insertatpos(head,tail,3,15);
     print(head);
-    cout<<endl;
-    cout<<"deleting first||last||pos node"<<endl;
-    // deletenode(head,1,5);
-    // deletenode(head,4,20);
-    // deletenode(head,3);
-    print(head);
+    tail->next = head->next;
+    cout<<"head = "<<head->data<<endl;
+    cout<<"tail = "<<tail->data<<endl;
+    if(detectloop(head)){
+        cout<<"cycle is present"<<endl;
+    }
+    else{
+        cout<<"no cycle is there"<<endl;
+    }
+
+    // cout<<"deleting first||last||pos node"<<endl;
+    // // deletenode(head,1,5);
+    // // deletenode(head,4,20);
+    // // deletenode(head,3);
+    // print(head);
 }
