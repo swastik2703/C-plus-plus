@@ -155,6 +155,22 @@ node* floydetectloop(node* head){
     return NULL;
 }
 
+node* startingnode(node* head){
+    if(head == NULL){
+        return NULL;
+    }
+
+    node* intersection = floydetectloop(head);
+
+    node* slow = head;
+
+    while(slow!= intersection){
+        slow = slow->next;
+        intersection = intersection->next;
+    }
+    return slow;
+}
+
 
 int main(){
     //make a newnode
@@ -178,5 +194,7 @@ int main(){
         cout<<"no cycle is there"<<endl;
     }
 
+    node* loop = startingnode(head);
+    cout<<"loop starts at: "<<loop->data<<endl;
     
 }
