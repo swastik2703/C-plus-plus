@@ -49,7 +49,7 @@ public:
 
     // Pop from stack 2 and return popped element.
     int pop2() {
-        //atleast ek element toh hona chahiye
+        //atleast ek element toh hona chaiye
         if(top2 < size){
             int ans = arr[top2];
             top2++;
