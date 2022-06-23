@@ -14,7 +14,7 @@ int findMinimumCost(string str) {
         if(ch == '{')
             s.push(ch);
         else{
-            //matlab apko closing milgaya
+            //matlab apko closing mil gaya
             if(!s.empty() && s.top() == '{'){
                 s.pop();
             }
@@ -24,7 +24,7 @@ int findMinimumCost(string str) {
         }
     }
         
-        //ab stack mai invalid expression pada hoga
+        //ab stack mai invalid expression pda hoga
         int a = 0, b = 0;
         while(!s.empty()){
             if(s.top() == '{'){
