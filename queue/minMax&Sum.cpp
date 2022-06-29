@@ -20,11 +20,11 @@ int solve(int *arr, int n, int k) {
         maxi.push_back(i);
         mini.push_back(i);
     }
-    int ans = 0;
 
+    int ans = 0;
     ans += arr[maxi.front()] + arr[mini.front()];
 
-    //remaining windows ko process karlo
+    //remaining windows ko process kar lo
     for(int i=k; i<n; i++) {
 
         
