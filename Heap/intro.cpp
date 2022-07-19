@@ -201,8 +201,8 @@ int main(){
     h.deleteFromHeap();
     h.print();
 
-    int arr[6] = {-1,54,53,55,52,50};
-    int n = 5;
+    int arr[8] = {-1,54,53,55,52,50,49,48};
+    int n = 8;
 
     for(int i=n/2; i>0; i--){
         heapify(arr,n,i);
