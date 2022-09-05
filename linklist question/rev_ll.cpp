@@ -33,20 +33,20 @@ Node* reverseLinkedList(Node *head)
     reverse(head,curr,prev);
     return head;
     
-//     if(head == NULL || head->next == NULL){
-//         return head;
-//     }
+    // if(head == NULL || head->next == NULL){
+    //     return head;
+    // }
     
-//     Node* prev = NULL;
-//     Node* curr = head;
-//     Node* forward = NULL;
+    // Node* prev = NULL;
+    // Node* curr = head;
+    // Node* forward = NULL;
     
-//     while(curr!=NULL){
-//         forward = curr->next;
-//         curr->next = prev;
-//         prev = curr;
-//         curr = forward;
-//     }
-//     return prev;
+    // while(curr!=NULL){
+    //     forward = curr->next;
+    //     curr->next = prev;
+    //     prev = curr;
+    //     curr = forward;
+    // }
+    // return prev;
 }
 
