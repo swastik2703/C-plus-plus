@@ -20,6 +20,7 @@ public:
         return dp[i][j] = ans;
     }
     
+    //METHOD FOR BOTTOM UP APPROACH
     int solveBU(string& a, string& b){
         vector<vector<int>> dp(a.length()+1, vector<int>(b.length()+1,0));
         for(int i=a.length()-1; i>=0; i--){
